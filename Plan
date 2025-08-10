@@ -1,0 +1,413 @@
+🔥 Plan de Estudios Personalizado – Andrea
+Duración: 6 meses (24 semanas) + Módulo extra obligatorio (Semana 25)
+Horario estimado: 1–2 horas al día
+Objetivo general: Convertirte en una backend dev PRO: Symfony, PHP, arquitectura, Docker/infra, seguridad, testing, frontend funcional (Twig + Vue básico), CI/CD y mensajería (RabbitMQ).
+
+Cómo usarlo: trabaja una semana a la vez. Cada semana: 3–5 lecturas/capítulos + 2 ejercicios prácticos (uno obligatorio, otro opcional). Marca checklist y resume en “Notas personales”.
+
+Mes 1 — Fundamentos sólidos de Symfony y PHP
+Meta mensual: dominar la base de Symfony, servicios, routing, controladores y Doctrine básico. Mini-proyecto del mes: una app de Blog/Artículos básica (CRUD) para iterar cada mes.
+
+Semana 1 — Routing, controladores, requests & responses
+Objetivo: entender rutas, controladores, requests y responses.
+Lecturas / recursos:
+
+Symfony Docs: Routing & Controllers — https://symfony.com/doc/current/routing.html / https://symfony.com/doc/current/controller.html
+Ejercicios (obligatorio):
+
+Crear proyecto Symfony (si no lo tienes): symfony new blog --webapp o composer create-project symfony/skeleton blog.
+
+Implementar ruta / y /article/{slug} que muestre un artículo de prueba.
+Ejercicio (opcional):
+
+Añadir manejo de 404 personalizado.
+Mini-tarea diaria: 1) Leer sección; 2) Implementar; 3) comentar 3 dudas en notas.
+
+Semana 2 — Servicios, DI, parámetros y contenedores
+Objetivo: comprender inyección de dependencias y servicios.
+Recursos:
+
+Symfony Services & Dependency Injection — https://symfony.com/doc/current/service_container.html
+Ejercicios (obligatorio):
+
+Crear un servicio App\Service\ArticleFormatter y usarlo desde un controlador.
+Opcional:
+
+Configurar parámetro en services.yaml y probar override por env.
+Tip: Es la base de todo—haz tests manuales para ver cómo se inyecta.
+
+Semana 3 — Doctrine ORM básico: entidades, migraciones y relaciones simples
+Objetivo: manejar entidades, migrations y operaciones CRUD con Doctrine.
+Recursos:
+
+Doctrine basics — https://symfony.com/doc/current/doctrine.html
+Ejercicios (obligatorio):
+
+Crear entidad Article (id, title, slug, content, created_at). Crear migración y poblar DB con fixtures.
+
+Implementar listado de artículos en Twig.
+Opcional: Añadir validaciones con Assert.
+
+Semana 4 — Formularios, validación y seguridad básica
+Objetivo: formularios en Symfony y validación.
+Recursos:
+
+Symfony Forms & Validation — https://symfony.com/doc/current/forms.html / https://symfony.com/doc/current/validation.html
+Ejercicios (obligatorio):
+
+Crear formulario para crear/editar artículos con validación.
+Opcional:
+
+Implementar protección CSRF (viene por defecto en Forms) y explicar cómo funciona en tus notas.
+
+Mes 2 — Docker y entorno de desarrollo profesional
+Meta mensual: Dockerizar tu aplicación (Nginx, PHP-FPM, MySQL, Redis), dominar docker-compose.
+
+Semana 5 — Fundamentos Docker: imágenes, contenedores, volúmenes
+Objetivo: entender imagen vs contenedor vs volumen.
+Recursos:
+
+Docker docs (Get Started) — https://docs.docker.com/get-started/
+Ejercicios (obligatorio):
+
+Escribir Dockerfile para la app PHP que ejecute php -v y composer install.
+Opcional: Jugar con docker run y ver containers listados (docker ps).
+
+Semana 6 — docker-compose: servicios, redes y variables de entorno
+Objetivo: orquestar contenedores locales.
+Recursos:
+
+Compose docs — https://docs.docker.com/compose/
+Ejercicios (obligatorio):
+
+Crear docker-compose.yml con servicios: app (php-fpm), nginx, db (mysql:8), redis.
+
+Levantar docker-compose up -d y comprobar logs.
+Opcional: Añadir volumen para código y depends_on.
+
+Semana 7 — Symfony en Docker: configurar Nginx + PHP-FPM + Xdebug
+Objetivo: ejecutar Symfony dentro de contenedores y debug remoto.
+Recursos:
+
+Ejemplo Symfony + Docker (buscar repos con docker-compose y Symfony)
+Ejercicios (obligatorio):
+
+Integrar Nginx config para servir Symfony (root /var/www/public).
+
+Configurar Xdebug (puerto mapping) y probar breakpoints desde tu IDE en Windows.
+Opcional: Probar docker exec -it para entrar al contenedor app.
+
+Semana 8 — Optimización local: cache, logs y rendimiento
+Objetivo: buenas prácticas de contenedores locales, caché y configuración php.ini relevante.
+Recursos:
+
+PHP performance tuning docs (opcache, realpath cache)
+Ejercicios (obligatorio):
+
+Activar OPcache en tu contenedor PHP y medir tiempo de ejecución de una ruta con y sin OPcache.
+
+Configurar shm_size si hace falta (tu entorno local lo usa).
+Opcional: Integrar Redis para cache de sesión.
+
+Mes 3 — Arquitectura, patrones y diseño de código
+Meta mensual: entender SOLID, Clean Architecture, DDD básico y aplicar a tu proyecto.
+
+Semana 9 — Principios SOLID y Clean Code
+Objetivo: conocer SOLID y aplicar SRP.
+Recursos:
+
+Refactoring.guru - SOLID — https://refactoring.guru/es/design-patterns/solid
+Ejercicios (obligatorio):
+
+Identificar una clase grande (o servicio) y refactorizarla en 2 servicios con SRP.
+Opcional: Añadir interfaces y tipos estrictos.
+
+Semana 10 — Capas: dominio, aplicación, infraestructura (Hexagonal / Ports & Adapters)
+Objetivo: separar lógica de dominio del framework.
+Recursos:
+
+Intro Hexagonal / Ports & Adapters (artículos)
+Ejercicios (obligatorio):
+
+Crear un Service/UseCase para “Publicar artículo” que solo dependa de una interface ArticleRepositoryInterface, implementar el repo con Doctrine en infraestructura.
+Opcional: Documentar el flujo en un diagrama simple.
+
+Semana 11 — DTOs, Value Objects y Anti-Corruption Layer
+Objetivo: usar DTOs y VO para mantener límites claros.
+Recursos:
+
+Ejemplos DDD en PHP (busca artículos/ejemplos "Value Object PHP")
+Ejercicios (obligatorio):
+
+Implementar DTO para la creación de artículo y mapearlo en el handler/usecase.
+Opcional: Añadir ValueObject para Slug (validación y formato).
+
+Semana 12 — Patrones comunes: Strategy, Factory, Repository y Command Bus
+Objetivo: aplicar patrones útiles para código escalable.
+Recursos:
+
+Refactoring.Guru (patrones)
+Ejercicios (obligatorio):
+
+Implementar un Factory para crear Article con ciertos defaults.
+Opcional: Integrar un simple Command Bus (puedes usar symfony/messenger en modo sync aquí).
+
+Mes 4 — Testing y Seguridad Web (complemento al máster)
+Meta mensual: tests unitarios/funcionales y cubrir OWASP Top 10 básicos en tu app.
+
+Semana 13 — PHPUnit: Unit tests
+Objetivo: aprender a testear servicios con PHPUnit.
+Recursos:
+
+PHPUnit docs — https://phpunit.de/getting-started.html
+Ejercicios (obligatorio):
+
+Escribir tests unitarios para ArticleFormatter y para un UseCase.
+Opcional: Integrar phpunit.xml y coverage básica.
+
+Semana 14 — Functional tests y Browser tests (Symfony)
+Objetivo: usar KernelTestCase y WebTestCase.
+Recursos:
+
+Symfony testing docs — https://symfony.com/doc/current/testing.html
+Ejercicios (obligatorio):
+
+Crear test funcional que compruebe que la ruta /article/{slug} responde 200 y renderiza título.
+Opcional: Usar Panther/BrowserKit para pruebas end-to-end (explora).
+
+Semana 15 — Seguridad en aplicaciones web (OWASP Top 10)
+Objetivo: saber las vulnerabilidades comunes y cómo mitigarlas.
+Recursos:
+
+OWASP Top 10 & Cheatsheets — https://cheatsheetseries.owasp.org/
+Ejercicios (obligatorio):
+
+Revisar tu app por inyecciones SQL, XSS y CSRF (crear ejemplos y arreglarlos).
+Opcional: Implementar CSP headers y revisar seguridad de cookies.
+
+Semana 16 — Autenticación y autorización avanzadas (roles, voters)
+Objetivo: dominar firewalls, providers, encoders y voters.
+Recursos:
+
+Symfony Security — https://symfony.com/doc/current/security.html
+Ejercicios (obligatorio):
+
+Implementar login + ROLE_ADMIN y proteger rutas de administración.
+Opcional: Crear un Voter para control de edición de artículos por autor.
+
+Mes 5 — APIs, integraciones y Frontend funcional
+Meta mensual: construir una API RESTful, integrarla con frontend ligero (Twig + Vue) y gestionar autenticación API (JWT).
+
+Semana 17 — Diseño RESTful y API basics
+Objetivo: entender diseño de recursos, status codes, paginación.
+Recursos:
+
+Artículos REST best practices; RFCs básicos.
+Ejercicios (obligatorio):
+
+Crear endpoints JSON para GET /api/articles, POST /api/articles.
+Opcional: Añadir paginación y filtros.
+
+Semana 18 — API Platform (opcional) o API manual con Symfony
+Objetivo: conocer API Platform y cómo exponer entidades rápidamente.
+Recursos:
+
+API Platform docs — https://api-platform.com/docs/
+Ejercicios (obligatorio):
+
+Implementar endpoint protegido y documentado (Swagger/OpenAPI).
+Opcional: Usar API Platform para CRUD.
+
+Semana 19 — Autenticación API: JWT / OAuth basics
+Objetivo: asegurar API con JWT (lexik/jwt-authentication-bundle) o similar.
+Recursos:
+
+LexikJWT bundle guide / oauth docs
+Ejercicios (obligatorio):
+
+Implementar login que devuelve token JWT y proteger endpoint con Authorization: Bearer.
+Opcional: Implementar refresh tokens (si te apetece).
+
+Semana 20 — Frontend funcional: Twig + Vue (integración)
+Objetivo: añadir interactividad ligera con Vue sobre templates Twig.
+Recursos:
+
+Twig docs — https://twig.symfony.com/doc/3.x/
+
+Vue 3 Guide — https://vuejs.org/guide/introduction.html
+Ejercicios (obligatorio):
+
+En la vista de listado de artículos (Twig) integra un componente Vue que filtre artículos en cliente (sin recargar).
+Opcional: Implementar un pequeño componente que cree comentario vía AJAX a la API.
+
+Mes 6 — DevOps básico, despliegue y consolidación
+Meta mensual: entender Nginx, reverse proxy, CI/CD básico y desplegar versión simple (simulada) con GitHub Actions.
+
+Semana 21 — Nginx como reverse proxy y configuración básica
+Objetivo: entender bloques server, location y proxy_pass.
+Recursos:
+
+DigitalOcean Nginx tutorials — https://www.digitalocean.com/community/tutorials/nginx-configuration
+Ejercicios (obligatorio):
+
+Crear configuración Nginx para servir public/ y proxy_pass a PHP-FPM.
+Opcional: Configurar HTTPS con Let's Encrypt (simulado o en un dominio de pruebas).
+
+Semana 22 — CI/CD básico con GitHub Actions
+Objetivo: pipeline que corre tests y linters en cada push.
+Recursos:
+
+GitHub Actions docs — https://docs.github.com/en/actions
+Ejercicios (obligatorio):
+
+Crear .github/workflows/ci.yml que: instala deps, corre phpunit y phpstan (o php-cs-fixer).
+Opcional: Añadir job que construya imagen Docker y la suba a un registry (simulado).
+
+Semana 23 — Logs, monitoreo básico y alertas (introducción)
+Objetivo: aprender a recoger logs y métricas básicas.
+Recursos:
+
+Introducción a Prometheus & Grafana (lectura)
+Ejercicios (obligatorio):
+
+Configurar logs de Symfony (monolog) a fichero y a stdout (docker-friendly).
+Opcional: Usar contenedores prometheus/grafana localmente para visualizar métricas básicas (si te apetece).
+
+Semana 24 — Proyecto final: consolidación y entrega
+Objetivo: unir todo: app dockerizada, tests, seguridad, API y frontend funcional.
+Tareas obligatorias:
+
+Dockerizar app completa con docker-compose (php, nginx, mysql, redis).
+
+Añadir CI básico que corra tests en push.
+
+Documentar README con pasos para levantar localmente.
+Opcional (reto ninja):
+
+Hacer deploy en un servidor cloud sencillo (DigitalOcean droplet) o usar Railway/Render/Heroku.
+
+Semana 25 — Módulo Extra Obligatorio: RabbitMQ + Symfony Messenger (¡obligatorio!)
+Objetivo: entender mensajería asíncrona y usar RabbitMQ con Symfony Messenger.
+
+Lecturas / recursos:
+
+Symfony Messenger docs — https://symfony.com/doc/current/messenger.html
+
+RabbitMQ docs intro — https://www.rabbitmq.com/getstarted.html
+
+Contenidos prácticos:
+
+Levantar RabbitMQ en Docker (rabbitmq:3-management) y acceder al panel.
+
+Configurar messenger.yaml para usar transport amqp://.
+
+Crear Message (DTO), MessageHandler y dispatch desde controladores.
+
+Levantar worker: php bin/console messenger:consume async -vv
+
+Retries, failure transports, middlewares.
+
+Ejercicio obligatorio:
+
+Implementar cola de envío de emails:
+
+Endpoint que dispatch un SendEmailMessage.
+
+SendEmailHandler que simula envío (o usa Mailcatcher).
+
+Worker que consume y registra estado en DB (sent / failed).
+
+Añadir supervisor/systemd (documental) o un script supervisor para mantener worker vivo en producción.
+
+Opcional (avanzado):
+
+Priorizar colas, usar exchanges/queues binding, y supervisar con management UI.
+
+Bloque Final — Conceptos de Infraestructura útiles (appendix)
+Este bloque es resumen informativo para darte visión general del ecosistema que verás en empresas.
+
+Supervisor / systemd
+Qué hacen: mantener procesos (workers) en ejecución y reiniciarlos si fallan.
+
+En producción: colocar supervisor o systemd sobre messenger:consume.
+
+ElasticSearch
+Uso: búsquedas full-text, sugerencias, facets.
+
+Uso típico: indexar artículos para búsquedas rápidas y relevantes.
+
+Prometheus + Grafana
+Prometheus (scrape metrics), Grafana (visualización).
+
+Métricas útiles: queue_length, worker_errors, request_latency, memory_usage.
+
+Kubernetes (K8s) — panorama general
+Orquestador para contenedores: deployments, services, ingress.
+
+No es urgente aprenderlo todo, pero entender pods, services y deployments ayuda.
+
+CI/CD (GitHub Actions, GitLab CI, Jenkins)
+Pipelines automáticos: test → build → release → deploy.
+
+Practica: crear pipeline que ejecute tests y build de imagen.
+
+Otros servicios que podrías ver en empresas
+Redis (cache, sessions, rate-limiting). Ya integrado en el plan.
+
+RabbitMQ (mensajería) — incluido en Semana 25.
+
+ElasticSearch (búsqueda) — opcional a futuro.
+
+Sentry (errores y reporting) — integrar cliente SDK es fácil y útil.
+
+Recursos recurrentes y herramientas recomendadas
+Symfony docs — https://symfony.com/doc/current/index.html
+
+PHP The Right Way — https://phptherightway.com/
+
+Docker docs — https://docs.docker.com/
+
+OWASP & Cheatsheets — https://cheatsheetseries.owasp.org/
+
+Vue 3 Guide — https://vuejs.org/guide/introduction.html
+
+Refactoring.Guru — https://refactoring.guru/
+
+GitHub Actions docs — https://docs.github.com/en/actions
+
+Herramientas de desarrollo:
+
+VS Code (con Xdebug extension), Docker Desktop / OrbStack, Postman/Insomnia, MySQL Workbench (o TablePlus), Redis CLI, Git.
+
+Mini-proyectos y retos opcionales (por niveles)
+Nivel básico: Blog CRUD (mes 1).
+
+Nivel intermedio: Dockerizar Blog + CI que corre tests (mes 2–6).
+
+Nivel avanzado: Añadir mensajería para envíos (Semana 25), búsqueda con ElasticSearch o integración con un microservicio.
+
+Extra ninja: Deploy en k8s mínimo o integración completa con Prometheus/Grafana.
+
+Checklist final (usa esto cada mes)
+ Mes 1 completado: Symfony básico + CRUD
+
+ Mes 2 completado: Docker + local env
+
+ Mes 3 completado: Arquitectura y patrones
+
+ Mes 4 completado: Testing + Seguridad
+
+ Mes 5 completado: API + Twig/Vue
+
+ Mes 6 completado: DevOps básico + despliegue
+
+ Semana 25 completada: RabbitMQ + Messenger
+
+ README + documentación del proyecto final completada
+
+Notas finales
+Ritmo: 1–2 h/día significa que algunas semanas las tareas opcionales las dejarás para el finde; es normal.
+
+Revisión conjunta: Si quieres, cuando completes algún mini-proyecto o módulo me lo pasas (link a GitHub) y lo revisamos juntas.
+
+Formato: este .md es totalmente editable; adapta tiempos, mueve semanas y mete temario del máster si lo empiezas en enero.
